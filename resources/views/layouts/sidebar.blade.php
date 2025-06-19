@@ -1,4 +1,7 @@
-@php use App\Constants\RouteName; @endphp
+@php
+use App\Constants\ViewName;
+use App\Constants\RouteName;
+@endphp
 <!-- Sidebar untuk NiceAdmin -->
 <aside id="sidebar" class="sidebar">
 
@@ -14,7 +17,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route(RouteName::BOOK_INDEX) }}">
+            <a class="nav-link" href="{{ route(ViewName::BOOK_INDEX) }}">
                 <i class="bi bi-book"></i>
                 <span>Buku</span>
             </a>

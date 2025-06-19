@@ -3,17 +3,6 @@
 @section('title', 'Tambah Buku Baru')
 
 @section('content')
-    <div class="pagetitle">
-        <h1>Tambah Buku Baru</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('books.index') }}">Buku</a></li>
-                <li class="breadcrumb-item active">Tambah Buku</li>
-            </ol>
-        </nav>
-    </div>
-
     <section class="section">
         <div class="row">
             <div class="col-lg-12">

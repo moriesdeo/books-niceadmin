@@ -17,13 +17,13 @@ Route::get('/main', function () {
 })->name(RouteName::HOME);
 
 // Book resource routes (with constant route names)
-Route::get('/books', [BookController::class, 'index'])->name(RouteName::BOOK_INDEX);
-Route::get('/books/create', [BookController::class, 'create'])->name(RouteName::BOOK_CREATE);
-Route::post('/books', [BookController::class, 'store'])->name(RouteName::BOOK_STORE);
-Route::get('/books/{book}', [BookController::class, 'show'])->name(RouteName::BOOK_SHOW);
-Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name(RouteName::BOOK_EDIT);
-Route::put('/books/{book}', [BookController::class, 'update'])->name(RouteName::BOOK_UPDATE);
-Route::delete('/books/{book}', [BookController::class, 'destroy'])->name(RouteName::BOOK_DESTROY);
+Route::get('/books', [BookController::class, 'index'])->name(ViewName::BOOK_INDEX);
+Route::get('/books/create', [BookController::class, 'create'])->name(ViewName::BOOK_CREATE);
+Route::post('/books', [BookController::class, 'store'])->name(ViewName::BOOK_STORE);
+Route::get('/books/{book}', [BookController::class, 'show'])->name(ViewName::BOOK_SHOW);
+Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name(ViewName::BOOK_EDIT);
+Route::put('/books/{book}', [BookController::class, 'update'])->name(ViewName::BOOK_UPDATE);
+Route::delete('/books/{book}', [BookController::class, 'destroy'])->name(ViewName::BOOK_DESTROY);
 
 // Auth routes (login/logout)
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name(RouteName::LOGIN);
