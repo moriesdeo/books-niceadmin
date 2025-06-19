@@ -3,17 +3,6 @@
 @section('title', 'Detail Buku')
 
 @section('content')
-    <div class="pagetitle">
-        <h1>Detail Buku</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('books.index') }}">Buku</a></li>
-                <li class="breadcrumb-item active">Detail Buku</li>
-            </ol>
-        </nav>
-    </div>
-
     <section class="section profile">
         <div class="row">
             <div class="col-xl-12">
