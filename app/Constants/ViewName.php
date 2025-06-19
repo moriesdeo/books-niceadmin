@@ -10,7 +10,7 @@ class ViewName
 
     // View untuk dashboard
     public const DASHBOARD = 'dashboard';
-    public const HOME = 'home';
+    public const HOME = 'layouts.main';
 
     // View untuk layouts
     public const LAYOUT_MAIN = 'layouts.main';

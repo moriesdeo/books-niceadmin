@@ -16,7 +16,9 @@ class RouteName
     public const BOOK_UPDATE = 'books.update';
     public const BOOK_DESTROY = 'books.destroy';
 
+    // Auth routes
     public const LOGIN = 'login';
     public const LOGIN_POST = 'login.post';
+    public const REGISTER = 'register';
     public const LOGOUT = 'logout';
 }

@@ -2,13 +2,18 @@
 
 use App\Constants\RouteName;
 use App\Constants\ViewName;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 // Home
 Route::get('/', function () {
-    return view(ViewName::LAYOUT_MAIN);
+    return view(ViewName::LOGIN);
+})->name(RouteName::HOME);
+
+Route::get('/main', function () {
+    return view(ViewName::HOME);
 })->name(RouteName::HOME);
 
 // Book resource routes (with constant route names)
@@ -24,3 +29,6 @@ Route::delete('/books/{book}', [BookController::class, 'destroy'])->name(RouteNa
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name(RouteName::LOGIN);
 Route::post('/login', [LoginController::class, 'login'])->name(RouteName::LOGIN_POST);
 Route::post('/logout', [LoginController::class, 'logout'])->name(RouteName::LOGOUT);
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name(RouteName::REGISTER);
+Route::post('/register', [RegisterController::class, 'register'])->name('register.post');

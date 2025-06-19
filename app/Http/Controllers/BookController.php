@@ -32,9 +32,14 @@ class BookController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
-            'published_year' => 'nullable|numeric|digits:4',
+            'published_year' => 'nullable|numeric|min:0|max:9999',
             'description' => 'nullable|string',
         ]);
+
+        // Ensure published_year is properly cast to integer
+        if (isset($validated['published_year'])) {
+            $validated['published_year'] = (int) $validated['published_year'];
+        }
 
         Book::create($validated);
 

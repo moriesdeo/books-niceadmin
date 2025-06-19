@@ -15,4 +15,8 @@ class Book extends Model
         'published_year',
         'description',
     ];
+
+    protected $casts = [
+        'published_year' => 'integer',
+    ];
 }
