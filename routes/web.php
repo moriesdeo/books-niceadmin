@@ -9,8 +9,12 @@ use Illuminate\Support\Facades\Route;
 
 // Home
 Route::get('/', function () {
-    return view(ViewName::LOGIN);
-})->name(RouteName::HOME);
+    if (auth()->check()) {
+        return redirect()->route(RouteName::HOME);
+    } else {
+        return view(ViewName::LOGIN);
+    }
+})->name('root');
 
 Route::get('/home', function () {
     return view(ViewName::HOME);
