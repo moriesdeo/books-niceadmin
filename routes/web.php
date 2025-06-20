@@ -12,7 +12,7 @@ Route::get('/', function () {
     return view(ViewName::LOGIN);
 })->name(RouteName::HOME);
 
-Route::get('/main', function () {
+Route::get('/home', function () {
     return view(ViewName::HOME);
 })->name(RouteName::HOME);
 
