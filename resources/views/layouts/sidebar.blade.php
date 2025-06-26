@@ -24,7 +24,7 @@ use App\Constants\RouteName;
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route(RouteName::LOGOUT) }}"
-               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+               onclick="event.preventDefault(); if(confirm('Apakah Anda yakin ingin logout?')) { document.getElementById('logout-form').submit(); }">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Logout</span>
             </a>
