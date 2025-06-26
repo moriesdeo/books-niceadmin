@@ -67,7 +67,6 @@
                                 </tr>
                             @endforelse
                             </tbody>
-                            </tbody>
                         </table>
 
                         @if($books->hasPages())
