@@ -17,16 +17,18 @@ WORKDIR /app
 # Copy project files
 COPY . /app
 
-# Ensure bootstrap/cache exists
-RUN mkdir -p /app/bootstrap/cache && chmod -R 775 /app/bootstrap/cache
+# Ensure storage and bootstrap/cache have correct permissions
+RUN mkdir -p /app/storage /app/bootstrap/cache \
+    && chmod -R 775 /app/storage /app/bootstrap/cache
 
-# Install composer dependencies
+# Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install composer dependencies (production only)
 RUN composer install --no-dev --optimize-autoloader --no-scripts
-RUN php artisan package:discover --ansi
 
 # Expose port
 EXPOSE 8000
 
-# Start command
-CMD php artisan serve --host=0.0.0.0 --port=8000
+# Start command: run migrations and serve
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
