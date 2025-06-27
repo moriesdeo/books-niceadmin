@@ -1,3 +1,4 @@
+@php use App\Constants\ViewName; @endphp
 @extends('layouts.main')
 
 @section('title', 'Tambah Buku Baru')
@@ -10,38 +11,43 @@
                     <div class="card-body">
                         <h5 class="card-title">Form Tambah Buku</h5>
 
-                        <form action="{{ route('books.store') }}" method="POST" class="row g-3">
+                        <form action="{{ route(ViewName::BOOK_STORE) }}" method="POST" class="row g-3">
                             @csrf
 
                             <div class="col-md-6">
                                 <label for="title" class="form-label">Judul Buku</label>
-                                <input type="text" name="title" id="title" value="{{ old('title') }}" required class="form-control @error('title') is-invalid @enderror">
+                                <input type="text" name="title" id="title" value="{{ old('title') }}" required
+                                       class="form-control @error('title') is-invalid @enderror">
                                 @error('title')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="col-md-6">
                                 <label for="author" class="form-label">Penulis</label>
-                                <input type="text" name="author" id="author" value="{{ old('author') }}" required class="form-control @error('author') is-invalid @enderror">
+                                <input type="text" name="author" id="author" value="{{ old('author') }}" required
+                                       class="form-control @error('author') is-invalid @enderror">
                                 @error('author')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="col-md-6">
                                 <label for="published_year" class="form-label">Tahun Terbit</label>
-                                <input type="number" name="published_year" id="published_year" value="{{ old('published_year') }}" class="form-control @error('published_year') is-invalid @enderror">
+                                <input type="number" name="published_year" id="published_year"
+                                       value="{{ old('published_year') }}"
+                                       class="form-control @error('published_year') is-invalid @enderror">
                                 @error('published_year')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="col-md-12">
                                 <label for="description" class="form-label">Deskripsi</label>
-                                <textarea name="description" id="description" rows="4" class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                                <textarea name="description" id="description" rows="4"
+                                          class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                                 @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 

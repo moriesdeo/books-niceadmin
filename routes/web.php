@@ -23,7 +23,7 @@ Route::get('/home', function () {
 // Book resource routes (with constant route names)
 Route::get('/books', [BookController::class, 'index'])->name(ViewName::BOOK_INDEX);
 Route::get('/books/create', [BookController::class, 'create'])->name(ViewName::BOOK_CREATE);
-Route::post('/books', [BookController::class, 'store'])->name(ViewName::BOOK_STORE);
+Route::post('/books/store', [BookController::class, 'store'])->name(ViewName::BOOK_STORE);
 Route::get('/books/{book}', [BookController::class, 'show'])->name(ViewName::BOOK_SHOW);
 Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name(ViewName::BOOK_EDIT);
 Route::put('/books/{book}', [BookController::class, 'update'])->name(ViewName::BOOK_UPDATE);
