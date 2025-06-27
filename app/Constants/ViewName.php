@@ -18,7 +18,7 @@ class ViewName
     public const LAYOUT_CONTENT = 'layouts.content';
 
     // View untuk buku
-    public const BOOK_INDEX = 'books.index';
+    public const BOOK_INDEX = 'route.books.index';
     public const BOOK_CREATE = 'books.create';
     public const BOOK_EDIT = 'books.edit';
     public const BOOK_SHOW = 'books.show';
