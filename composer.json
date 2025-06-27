@@ -32,7 +32,9 @@
             "Tests\\": "tests/"
         }
     },
-    "scripts": {},
+    "scripts": {
+        "post-autoload-dump": []
+    },
     "extra": {
         "laravel": {
             "dont-discover": []
