@@ -21,10 +21,10 @@ class ViewName
     public const BOOK_INDEX = 'route.books.index';
     public const BOOK_CREATE = 'books.create';
     public const BOOK_EDIT = 'books.edit';
-    public const BOOK_SHOW = 'books.show';
-    public const BOOK_STORE = 'books.store';
-    public const BOOK_UPDATE = 'books.update';
-    public const BOOK_DESTROY = 'books.destroy';
+    public const BOOK_SHOW = 'books.extra.show';
+    public const BOOK_STORE = 'other-books.store';
+    public const BOOK_UPDATE = 'books.patch.update';
+    public const BOOK_DESTROY = 'books.force.destroy';
 
     // View untuk errors
     public const ERROR_403 = 'errors.403';
