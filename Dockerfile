@@ -19,7 +19,7 @@ COPY . /app
 
 # Ensure storage and bootstrap/cache have correct permissions
 RUN mkdir -p /app/storage /app/bootstrap/cache \
-    && chmod -R 775 /app/storage /app/bootstrap/cache \
+    && chmod -R ug+rwx /app/storage /app/bootstrap/cache \
     && chown -R www-data:www-data /app/storage /app/bootstrap/cache
 
 # Install Composer
@@ -30,6 +30,9 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 # Expose port
 EXPOSE 8000
+
+# Switch to non-root user
+USER www-data
 
 # Start command: run migrations and serve
 CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
