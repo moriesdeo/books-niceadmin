@@ -9,22 +9,7 @@ class ViewName
     public const REGISTER = 'auth.register';
 
     // View untuk dashboard
-    public const DASHBOARD = 'dashboard';
     public const HOME = 'dashboard';
-
-    // View untuk layouts
-    public const LAYOUT_MAIN = 'layouts.main';
-    public const LAYOUT_SIDEBAR = 'layouts.sidebar';
-    public const LAYOUT_CONTENT = 'layouts.content';
-
-    // View untuk buku
-    public const BOOK_INDEX = 'route.books.index';
-    public const BOOK_CREATE = 'books.create';
-    public const BOOK_EDIT = 'books.edit';
-    public const BOOK_SHOW = 'books.extra.show';
-    public const BOOK_STORE = 'other-books.store';
-    public const BOOK_UPDATE = 'books.patch.update';
-    public const BOOK_DESTROY = 'books.force.destroy';
 
     // View untuk errors
     public const ERROR_403 = 'errors.403';

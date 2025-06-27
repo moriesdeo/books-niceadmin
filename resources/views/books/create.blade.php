@@ -1,4 +1,3 @@
-@php use App\Constants\ViewName; @endphp
 @extends('layouts.main')
 
 @section('title', 'Tambah Buku Baru')
@@ -11,7 +10,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Form Tambah Buku</h5>
 
-                        <form action="{{ route(ViewName::BOOK_STORE) }}" method="POST" class="row g-3">
+                        <form action="{{ route('books.store') }}" method="POST" class="row g-3">
                             @csrf
 
                             <div class="col-md-6">

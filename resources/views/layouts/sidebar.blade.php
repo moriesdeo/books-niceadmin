@@ -17,7 +17,7 @@ use App\Constants\RouteName;
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route(ViewName::BOOK_INDEX) }}">
+            <a class="nav-link" href="{{ route('books.index') }}">
                 <i class="bi bi-book"></i>
                 <span>Buku</span>
             </a>
