@@ -14,15 +14,19 @@ WORKDIR /app
 
 COPY . /app
 
+# Buat folder + permission saat build
 RUN mkdir -p /app/storage /app/bootstrap/cache \
     && chmod -R 775 /app/storage /app/bootstrap/cache
 
+# Pasang composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Pasang dependency tanpa post-script artisan
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 EXPOSE 8000
 
+# Jalankan artisan saat container start
 CMD mkdir -p /app/bootstrap/cache && chmod -R 775 /app/bootstrap/cache && \
     php artisan package:discover && \
     php artisan migrate --force && \
