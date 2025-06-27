@@ -1,6 +1,5 @@
 FROM php:8.1-fpm
 
-# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -11,28 +10,19 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Set working directory
 WORKDIR /app
 
-# Copy project files
 COPY . /app
 
-# Ensure storage and bootstrap/cache have correct permissions
 RUN mkdir -p /app/storage /app/bootstrap/cache \
-    && chmod -R ug+rwx /app/storage /app/bootstrap/cache \
-    && chown -R www-data:www-data /app/storage /app/bootstrap/cache
+    && chmod -R ug+rwx /app/storage /app/bootstrap/cache
 
-# Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install composer dependencies (production only)
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
-# Expose port
+RUN chown -R www-data:www-data /app
+
 EXPOSE 8000
 
-# Switch to non-root user
-USER www-data
-
-# Start command: run migrations and serve
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
+CMD su www-data -s /bin/sh -c "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000"
