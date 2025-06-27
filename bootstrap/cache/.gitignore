@@ -1,2 +1,2 @@
-/bootstrap/cache/*
-!/bootstrap/cache/.gitignore
+*
+!.gitignore
