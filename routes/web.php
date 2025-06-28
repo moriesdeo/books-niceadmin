@@ -24,7 +24,7 @@ Route::get('/home', function () {
 Route::resource('books', BookController::class);
 
 // Auth routes (login/logout)
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name(RouteName::LOGIN);
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name(RouteName::LOGIN_VIEW_SHOW);
 Route::post('/login', [LoginController::class, 'login'])->name(RouteName::LOGIN_POST);
 Route::post('/logout', [LoginController::class, 'logout'])->name(RouteName::LOGOUT);
 

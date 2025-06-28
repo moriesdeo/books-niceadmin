@@ -56,7 +56,7 @@
                         <button type="submit" class="btn btn-primary w-100">Daftar</button>
                     </form>
                     <div class="mt-3 text-center">
-                        <a href="{{ route('login') }}">Sudah punya akun? Masuk di sini</a>
+                        <a href="{{ route(RouteName::LOGIN_VIEW_SHOW) }}">Sudah punya akun? Masuk di sini</a>
                     </div>
                 </div>
             </div>

@@ -22,12 +22,12 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route(RouteName::LOGOUT) }}"
+            <a class="nav-link" href="#"
                onclick="event.preventDefault(); if(confirm('Apakah Anda yakin ingin logout?')) { document.getElementById('logout-form').submit(); }">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Logout</span>
             </a>
-            <form id="logout-form" action="{{ secure_url('/logout') }}" method="POST" class="d-none">
+            <form id="logout-form" action="{{ route(RouteName::LOGOUT) }}" method="POST" class="d-none">
                 @csrf
             </form>
         </li>
