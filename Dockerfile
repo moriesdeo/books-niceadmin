@@ -23,7 +23,10 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 EXPOSE 8000
 
-CMD mkdir -p /app/bootstrap/cache && chmod -R 775 /app/bootstrap/cache && \
+CMD php artisan config:clear && \
+    php artisan cache:clear && \
+    php artisan route:clear && \
+    mkdir -p bootstrap/cache && chmod -R 775 bootstrap/cache && \
     php artisan package:discover && \
     php artisan migrate --force && \
     php artisan serve --host=0.0.0.0 --port=8000
