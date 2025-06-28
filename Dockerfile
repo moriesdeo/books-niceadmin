@@ -16,7 +16,7 @@ COPY . .
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN composer install --no-dev --optimize-autoloader --no-scripts
+RUN composer install --no-dev --optimize-autoloader --no-scripts --verbose
 
 # Buat storage dan cache dengan permission
 RUN mkdir -p /app/storage /app/bootstrap/cache
