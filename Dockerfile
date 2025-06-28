@@ -21,18 +21,21 @@ COPY nginx.conf /etc/nginx/sites-available/default
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer install --no-dev --optimize-autoloader --no-scripts --verbose
 
-# Set permissions for Laravel storage and cache folders
-RUN chmod -R 775 /app/storage /app/bootstrap/cache
+# Ensure storage and cache folders exist
+RUN mkdir -p /app/storage /app/bootstrap/cache
 
 # Supervisor config for running both php-fpm and nginx
 COPY --chown=root:root supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 8080
+EXPOSE 9000
 
-CMD php artisan config:clear && \
+CMD mkdir -p /app/storage /app/bootstrap/cache && \
+    chmod -R 775 /app/storage /app/bootstrap/cache && \
+    php artisan config:clear && \
     php artisan cache:clear && \
     php artisan route:clear && \
     php artisan view:clear && \
     php artisan config:cache && \
     php artisan migrate --force && \
-    supervisord -c /etc/supervisor/conf.d/supervisord.conf
+    php-fpm -F
