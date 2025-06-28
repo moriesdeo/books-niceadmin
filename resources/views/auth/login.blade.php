@@ -59,7 +59,7 @@
                     </form>
 
                     <div class="mt-3 text-center">
-                        <a href="{{ route(RouteName::REGISTER) }}">Belum punya akun? Daftar di sini</a>
+                        <a href="{{ route(RouteName::REGISTER_VIEW_SHOW) }}">Belum punya akun? Daftar di sini</a>
                     </div>
                 </div>
             </div>
