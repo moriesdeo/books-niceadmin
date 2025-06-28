@@ -29,4 +29,4 @@ Route::post('/login', [LoginController::class, 'login'])->name(RouteName::LOGIN_
 Route::post('/logout', [LoginController::class, 'logout'])->name(RouteName::LOGOUT);
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name(RouteName::REGISTER);
-Route::post('/register', [RegisterController::class, 'register'])->name('register.post');
+Route::post('/register', [RegisterController::class, 'register'])->name(RouteName::REGISTER_POST);

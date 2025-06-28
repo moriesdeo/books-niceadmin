@@ -11,5 +11,6 @@ class RouteName
     public const LOGIN = 'login';
     public const LOGIN_POST = 'login.post';
     public const REGISTER = 'register';
+    public const REGISTER_POST = 'register.post';
     public const LOGOUT = 'logout';
 }
