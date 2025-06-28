@@ -1,5 +1,6 @@
 FROM php:8.2-fpm
 
+# Install dependency
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -11,34 +12,26 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Set workdir
 WORKDIR /app
 
+# Copy source code
 COPY . .
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN php -v && php -m && composer diagnose
-
+# Install dependencies
 RUN composer install --no-dev --optimize-autoloader --no-scripts --verbose
 
-RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/logs /app/bootstrap/cache
-RUN chmod -R 775 /app/storage /app/bootstrap/cache
-RUN mkdir -p /app/resources/views /app/storage/framework/views && chmod -R 775 /app/resources/views /app/storage/framework/views
+# Set permissions
+RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/logs /app/bootstrap/cache \
+    && chmod -R 775 /app/storage /app/bootstrap/cache
+
+# Copy entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 8080
 
-# --- RAILWAY DEPLOYMENT NOTE ---
-# Railway will set the PORT environment variable automatically.
-# Make sure your Laravel app uses env('PORT', 8080) for the serve command.
-# Ensure .env and all required environment variables are set in Railway dashboard.
-# --------------------------------
-
-CMD set -e && \
-    mkdir -p bootstrap/cache && chmod -R 775 bootstrap/cache && \
-    php artisan config:clear && \
-    php artisan cache:clear && \
-    php artisan route:clear && \
-    php artisan view:clear && \
-    php artisan config:cache && \
-    php artisan migrate --force && \
-    php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+ENTRYPOINT ["docker-entrypoint.sh"]
