@@ -25,7 +25,7 @@ RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/
 RUN chmod -R 775 /app/storage /app/bootstrap/cache
 RUN mkdir -p /app/resources/views /app/storage/framework/views && chmod -R 775 /app/resources/views /app/storage/framework/views
 
-EXPOSE 9000
+EXPOSE 8080
 
 CMD set -e && \
     php artisan config:clear && \
@@ -34,4 +34,4 @@ CMD set -e && \
     php artisan view:clear && \
     php artisan config:cache && \
     php artisan migrate --force && \
-    php-fpm
+    php-fpm --nodaemonize --fpm-config /usr/local/etc/php-fpm.d/www.conf --force-stderr --listen 8080
