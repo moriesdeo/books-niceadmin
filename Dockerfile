@@ -33,4 +33,4 @@ EXPOSE 9000
 CMD mkdir -p /app/storage /app/bootstrap/cache /app/resources/views /app/storage/framework/views && \
     chmod -R 775 /app/storage /app/bootstrap/cache && \
     php artisan migrate --force && \
-    php-fpm -F
+    supervisord -c /etc/supervisor/conf.d/supervisord.conf
