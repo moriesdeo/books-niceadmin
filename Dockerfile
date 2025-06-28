@@ -25,20 +25,13 @@ RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/
 RUN chmod -R 775 /app/storage /app/bootstrap/cache
 RUN mkdir -p /app/resources/views /app/storage/framework/views && chmod -R 775 /app/resources/views /app/storage/framework/views
 
-EXPOSE 8080
-
-# --- RAILWAY DEPLOYMENT NOTE ---
-# Railway will set the PORT environment variable automatically.
-# Make sure your Laravel app uses env('PORT', 8080) for the serve command.
-# Ensure .env and all required environment variables are set in Railway dashboard.
-# --------------------------------
+EXPOSE 9000
 
 CMD set -e && \
-    mkdir -p bootstrap/cache && chmod -R 775 bootstrap/cache && \
     php artisan config:clear && \
     php artisan cache:clear && \
     php artisan route:clear && \
     php artisan view:clear && \
     php artisan config:cache && \
     php artisan migrate --force && \
-    php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+    php-fpm
