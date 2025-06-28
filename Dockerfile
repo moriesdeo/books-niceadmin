@@ -21,7 +21,7 @@ RUN php -v && php -m && composer diagnose
 
 RUN composer install --no-dev --optimize-autoloader --no-scripts --verbose
 
-RUN mkdir -p /app/storage/framework/{views,cache} /app/storage/logs /app/bootstrap/cache
+RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/logs /app/bootstrap/cache
 RUN chmod -R 775 /app/storage /app/bootstrap/cache
 
 EXPOSE 8080
