@@ -33,4 +33,4 @@ CMD set -e && \
     php artisan route:clear && \
     php artisan package:discover && \
     php artisan migrate --force && \
-    php artisan serve --host=0.0.0.0 --port=8000
+    php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
