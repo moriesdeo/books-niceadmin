@@ -13,24 +13,25 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY . /app
+COPY . .
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN php -v && php -m && composer diagnose
 
 RUN composer install --no-dev --optimize-autoloader --no-scripts --verbose
 
 RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/logs /app/bootstrap/cache
 RUN chmod -R 775 /app/storage /app/bootstrap/cache
 
-EXPOSE 9000
+EXPOSE 8080
 
 CMD set -e && \
-    ls -la /app/resources && \
-    ls -la /app/resources/views && \
+    mkdir -p bootstrap/cache && chmod -R 775 bootstrap/cache && \
     php artisan config:clear && \
     php artisan cache:clear && \
     php artisan route:clear && \
     php artisan view:clear && \
     php artisan config:cache && \
     php artisan migrate --force && \
-    php-fpm
+    php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
