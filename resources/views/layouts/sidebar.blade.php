@@ -1,8 +1,7 @@
 @php
-use App\Constants\ViewName;
-use App\Constants\RouteName;
+    use App\Constants\RouteName;
 @endphp
-<!-- Sidebar untuk NiceAdmin -->
+    <!-- Sidebar untuk NiceAdmin -->
 <aside id="sidebar" class="sidebar">
 
     <div class="sidebar-brand d-flex align-items-center justify-content-center mb-4">
@@ -28,7 +27,7 @@ use App\Constants\RouteName;
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Logout</span>
             </a>
-            <form id="logout-form" action="{{ route(RouteName::LOGOUT) }}" method="POST" class="d-none">
+            <form id="logout-form" action="{{ secure_url('/logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
         </li>
