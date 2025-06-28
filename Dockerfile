@@ -23,8 +23,15 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts --verbose
 
 RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/logs /app/bootstrap/cache
 RUN chmod -R 775 /app/storage /app/bootstrap/cache
+RUN mkdir -p /app/resources/views /app/storage/framework/views && chmod -R 775 /app/resources/views /app/storage/framework/views
 
 EXPOSE 8080
+
+# --- RAILWAY DEPLOYMENT NOTE ---
+# Railway will set the PORT environment variable automatically.
+# Make sure your Laravel app uses env('PORT', 8080) for the serve command.
+# Ensure .env and all required environment variables are set in Railway dashboard.
+# --------------------------------
 
 CMD set -e && \
     mkdir -p bootstrap/cache && chmod -R 775 bootstrap/cache && \
