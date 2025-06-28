@@ -28,6 +28,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 EXPOSE 8080
 
 CMD set -e && \
+    ls -la /app/resources && \
+    ls -la /app/resources/views && \
     php artisan config:clear && \
     php artisan cache:clear && \
     php artisan route:clear && \
