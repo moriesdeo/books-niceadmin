@@ -2,7 +2,7 @@
 set -e
 
 echo "Menunggu database siap..."
-until mysql -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USERNAME" -p"$DB_PASSWORD" -e "SELECT 1" > /dev/null 2>&1; do
+until mysqladmin ping -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USERNAME" -p"$DB_PASSWORD" --silent; do
   echo "Waiting for DB..."
   sleep 1
 done
