@@ -33,6 +33,6 @@ CMD set -e && \
     php artisan cache:clear && \
     php artisan route:clear && \
     php artisan view:clear && \
-    php artisan package:discover && \
+    php artisan config:cache && \
     php artisan migrate --force && \
     php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
