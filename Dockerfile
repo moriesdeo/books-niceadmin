@@ -3,7 +3,6 @@ FROM php:8.2-fpm
 RUN apt-get update && apt-get install -y \
     git \
     curl \
-    nginx \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
@@ -23,9 +22,7 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts --verbose
 RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/logs /app/bootstrap/cache
 RUN chmod -R 775 /app/storage /app/bootstrap/cache
 
-COPY nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 8080
+EXPOSE 9000
 
 CMD set -e && \
     ls -la /app/resources && \
@@ -36,4 +33,4 @@ CMD set -e && \
     php artisan view:clear && \
     php artisan config:cache && \
     php artisan migrate --force && \
-    php-fpm -D && nginx -g "daemon off;"
+    php-fpm
