@@ -27,7 +27,8 @@ RUN chmod -R 775 /app/storage /app/bootstrap/cache
 EXPOSE 8080
 
 CMD set -e && \
-    mkdir -p bootstrap/cache && chmod -R 775 bootstrap/cache && \
+    mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions storage/framework/testing storage/logs bootstrap/cache && \
+    chmod -R 775 storage bootstrap/cache && \
     php artisan config:clear && \
     php artisan cache:clear && \
     php artisan route:clear && \
