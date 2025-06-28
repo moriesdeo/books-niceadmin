@@ -1,4 +1,3 @@
-@php@endphp
 <section class="section dashboard">
     <div class="row">
         <div class="col-12">
