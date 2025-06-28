@@ -1,6 +1,5 @@
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 
-# Install dependencies & PHP extensions
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -12,28 +11,21 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
-# Set working directory
 WORKDIR /app
 
-# Copy source code
 COPY . .
 
-# Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Debug PHP & Composer env (hilangkan kalau build sudah lancar)
 RUN php -v && php -m && composer diagnose
 
-# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-scripts --verbose
 
-# Ensure storage & cache folders
 RUN mkdir -p /app/storage /app/bootstrap/cache
 RUN chmod -R 775 /app/storage /app/bootstrap/cache
 
 EXPOSE 8000
 
-# Start command
 CMD set -e && \
     mkdir -p bootstrap/cache && chmod -R 775 bootstrap/cache && \
     php artisan config:clear && \
