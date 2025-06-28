@@ -27,7 +27,7 @@
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Logout</span>
             </a>
-            <form id="logout-form" action="{{ secure_url('/logout') }}" method="POST" class="d-none">
+            <form id="logout-form" action="{{ route('/logout') }}" method="POST" class="d-none">
                 @csrf
             </form>
         </li>
