@@ -41,10 +41,10 @@ services:
         volumes:
             - db_data:/var/lib/mysql
         healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
             interval: 5s
-            timeout: 5s
-            retries: 10
+            timeout: 10s
+            retries: 20
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin

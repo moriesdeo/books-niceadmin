@@ -1,6 +1,6 @@
 FROM php:8.2-fpm-alpine
 
-# Install dependency
+# Install dependencies
 RUN apk add --no-cache \
     bash \
     mysql-client \
@@ -12,16 +12,21 @@ RUN apk add --no-cache \
     libzip-dev \
     oniguruma-dev \
     && docker-php-ext-install pdo_mysql intl zip opcache
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set workdir
+# Add wait-for-it script
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /usr/local/bin/wait-for-it
+RUN chmod +x /usr/local/bin/wait-for-it
+
+# Set working directory
 WORKDIR /app
 
 # Copy source code
 COPY . .
 
-# Install dependencies
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-scripts --verbose
 
 # Set permissions
