@@ -1,44 +1,42 @@
-FROM php:8.2-fpm
+FROM php:8.2-fpm-alpine
 
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
+# Install dependencies
+RUN apk add --no-cache \
+    bash \
+    mysql-client \
     libpng-dev \
-    libonig-dev \
-    libxml2-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    icu-dev \
+    zlib-dev \
     libzip-dev \
-    zip \
-    unzip \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+    oniguruma-dev \
+    && docker-php-ext-install pdo_mysql intl zip opcache
 
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Add wait-for-it script
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /usr/local/bin/wait-for-it
+RUN chmod +x /usr/local/bin/wait-for-it
+
+# Set working directory
 WORKDIR /app
 
+# Copy source code
 COPY . .
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN php -v && php -m && composer diagnose
-
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-scripts --verbose
 
-RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/logs /app/bootstrap/cache
-RUN chmod -R 775 /app/storage /app/bootstrap/cache
-RUN mkdir -p /app/resources/views /app/storage/framework/views && chmod -R 775 /app/resources/views /app/storage/framework/views
+# Set permissions
+RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/logs /app/bootstrap/cache \
+    && chmod -R 775 /app/storage /app/bootstrap/cache
+
+# Copy entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 8080
 
-# --- RAILWAY DEPLOYMENT NOTE ---
-# Railway will set the PORT environment variable automatically.
-# Make sure your Laravel app uses env('PORT', 8080) for the serve command.
-# Ensure .env and all required environment variables are set in Railway dashboard.
-# --------------------------------
-
-CMD set -e && \
-    mkdir -p bootstrap/cache && chmod -R 775 bootstrap/cache && \
-    php artisan config:clear && \
-    php artisan cache:clear && \
-    php artisan route:clear && \
-    php artisan view:clear && \
-    php artisan config:cache && \
-    php artisan migrate --force && \
-    php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+ENTRYPOINT ["docker-entrypoint.sh"]
