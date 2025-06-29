@@ -2,17 +2,16 @@ FROM php:8.2-fpm-alpine
 
 # Install dependency
 RUN apk add --no-cache \
-    git \
-    curl \
+    bash \
     mysql-client \
     libpng-dev \
-    oniguruma-dev \
-    libxml2-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    icu-dev \
+    zlib-dev \
     libzip-dev \
-    zip \
-    unzip \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
-
+    oniguruma-dev \
+    && docker-php-ext-install pdo_mysql intl zip opcache
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
