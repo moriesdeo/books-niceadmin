@@ -1,12 +1,12 @@
-FROM php:8.2-fpm
+FROM php:8.2-fpm-alpine
 
 # Install dependency
-RUN apt-get update && apt-get install -y \
+RUN apk add --no-cache \
     git \
     curl \
-    default-mysql-client \
+    mysql-client \
     libpng-dev \
-    libonig-dev \
+    oniguruma-dev \
     libxml2-dev \
     libzip-dev \
     zip \
