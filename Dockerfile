@@ -32,5 +32,7 @@ RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/
 EXPOSE 8080
 
 CMD set -e && \
+    php artisan config:clear && php artisan route:clear && php artisan view:clear && \
+    php artisan config:cache && php artisan route:cache && php artisan view:cache && \
     php artisan migrate --force && \
     php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
