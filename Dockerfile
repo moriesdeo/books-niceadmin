@@ -16,7 +16,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN chmod -R 775 /app/resources/views /app/storage /app/bootstrap/cache
+RUN chmod -R 775 /app/resources/views /app/storage /app/bootstrap/cache || true
 
 EXPOSE 8080
 
