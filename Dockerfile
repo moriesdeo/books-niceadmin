@@ -1,5 +1,6 @@
 FROM php:8.2-fpm
 
+# Install PHP extensions
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -14,16 +15,19 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
+# Copy semua file, termasuk resources/views + public/assets/forms
 COPY . .
 
+# Install composer dependencies (production)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer install --no-dev --optimize-autoloader --prefer-dist --no-scripts --verbose
 
-RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/logs /app/bootstrap/cache \
-    && chmod -R 775 /app/storage /app/bootstrap/cache
+# Set permission supaya view + storage aman
+RUN chmod -R 775 /app/resources/views /app/storage /app/bootstrap/cache
 
 EXPOSE 8080
 
+# Build cache saat runtime (env sudah ada)
 CMD set -e && \
     php artisan config:clear && php artisan route:clear && php artisan view:clear && \
     php artisan config:cache && php artisan route:cache && php artisan view:cache && \
