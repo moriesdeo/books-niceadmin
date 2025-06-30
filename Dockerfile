@@ -1,6 +1,5 @@
 FROM php:8.2-fpm
 
-# Install PHP extension
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -15,17 +14,11 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Copy app code + static asset + forms
 COPY . .
 
-# Install composer prod dependencies
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer install --no-dev --optimize-autoloader --prefer-dist --no-scripts --verbose
 
-# Cache config, route, view
-RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
-
-# Set permission
 RUN mkdir -p /app/storage/framework/{views,cache,sessions,testing} /app/storage/logs /app/bootstrap/cache \
     && chmod -R 775 /app/storage /app/bootstrap/cache
 
