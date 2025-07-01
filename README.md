@@ -30,48 +30,60 @@ This project is a Laravel-based web application designed for managing books and 
 
 ### Installation
 
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd books-niceadmin
-   ```
-3. Install PHP dependencies:
-   ```bash
-   composer install
-   ```
-4. Install JavaScript dependencies:
-   ```bash
-   npm install
-   ```
-5. Set up the environment file:
-   ```bash
-   cp .env.example .env
-   ```
-6. Generate the application key:
-   ```bash
-   php artisan key:generate
-   ```
-7. Run migrations and seeders:
-   ```bash
-   php artisan migrate --seed
-   ```
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/example/books-niceadmin.git
+    cd books-niceadmin
+    ```
 
-### Running the Application
+2.  **Install Composer dependencies**
+    ```bash
+    composer install
+    ```
 
-Start the development server:
-```bash
-php artisan serve
-```
+3.  **Create environment file**
+    Copy the `.env.example` file to `.env`.
+    ```bash
+    cp .env.example .env
+    ```
 
-Compile front-end assets:
-```bash
-npm run dev
-```
+4.  **Generate application key**
+    ```bash
+    php artisan key:generate
+    ```
 
-Access the application at [http://localhost:8000](http://localhost:8000).
+5.  **Configure your database**
+    Open the `.env` file and set your database credentials.
+    ```
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=books_niceadmin
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
+
+6.  **Run database migrations and seeders**
+    ```bash
+    php artisan migrate --seed
+    ```
+
+7.  **Install NPM dependencies**
+    ```bash
+    npm install
+    ```
+
+8.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
+    And in another terminal:
+    ```bash
+    php artisan serve
+    ```
+
+9.  **Access the application**
+    You can now access the application at `http://127.0.0.1:8000`.
 
 ## API Documentation
 
