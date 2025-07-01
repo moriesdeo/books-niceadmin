@@ -3,7 +3,7 @@
 use Illuminate\Support\Str;
 
 return [
-    'default' => env('CACHE_STORE', 'file'),
+    'default' => 'file',
 
     'stores' => [
         'array' => [
@@ -17,5 +17,5 @@ return [
         ],
     ],
 
-    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache'),
+    'prefix' => Str::slug('laravel', '_').'_cache',
 ];
