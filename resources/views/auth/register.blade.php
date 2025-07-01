@@ -14,7 +14,7 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    <form action="{{ route(RouteName::REGISTER_POST) }}" method="POST">
+                    <form action="{{ secure_url(route(RouteName::REGISTER_POST)) }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama</label>
